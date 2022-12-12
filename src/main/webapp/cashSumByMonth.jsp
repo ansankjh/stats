@@ -4,6 +4,7 @@
 <%
 	int year = 0;
 	// year가 안넘어오면 오늘 날짜의 year나오게한다
+	// 이걸로는 올해년도 밖에 못받아온다.
 	if(request.getParameter("year") == null) {
 		Calendar c = Calendar.getInstance();
 		year = c.get(Calendar.YEAR);
@@ -17,6 +18,7 @@
 	ArrayList<HashMap<String, Object>> list = cashService.getCashSumByMonth(year, category);
 	
 	// 페이징에 사용할 최소년도와 최대년도
+	// 페이징을 이용해 위의 year가 null이 아니면 요청한값을 받아온다.
 	HashMap<String, Object> map = cashService.getMaxMinYear();
 	int minYear = (Integer)(map.get("minYear")); // int ->> Integer 박싱  // Integer --> 언박싱
 	int maxYear = (Integer)(map.get("maxYear"));
